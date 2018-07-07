@@ -17,6 +17,6 @@ class AuthModule(private val authService: AuthService) {
 
     }
 
-    fun presenter() = Presenter(authService)
+    fun presenter(view: Presenter.View) = Presenter(authService, view)
 
 }

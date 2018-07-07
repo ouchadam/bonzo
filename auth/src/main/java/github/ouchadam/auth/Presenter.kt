@@ -3,7 +3,7 @@ package github.ouchadam.auth
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 
-class Presenter(private val service: AuthService) {
+class Presenter(private val service: AuthService, private val view: View) {
 
     private val disposables = CompositeDisposable()
 
@@ -11,16 +11,26 @@ class Presenter(private val service: AuthService) {
         disposables += service.submitResponse(redirectUrlResponse)
                 .subscribeAsLce(
                         onLoading = {
-                            // show loading
+                            view.showLoading()
                         },
                         onContent = {
-                            // show content
+                            view.showContent()
                         },
                         onError = {
-                            // handle error?
+                            view.showError()
                         })
     }
 
     fun stopPresenting() = disposables.clear()
+
+    interface View {
+
+        fun showLoading()
+
+        fun showContent()
+
+        fun showError()
+
+    }
 
 }

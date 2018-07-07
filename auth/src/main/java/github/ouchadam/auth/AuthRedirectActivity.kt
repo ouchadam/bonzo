@@ -3,7 +3,7 @@ package github.ouchadam.auth
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-class AuthRedirectActivity : AppCompatActivity() {
+class AuthRedirectActivity : AppCompatActivity(), Presenter.View {
 
     private lateinit var presenter: Presenter
 
@@ -12,7 +12,7 @@ class AuthRedirectActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val authModule = AuthModule.create()
-        presenter = authModule.presenter()
+        presenter = authModule.presenter(this)
     }
 
     override fun onStart() {
@@ -21,4 +21,20 @@ class AuthRedirectActivity : AppCompatActivity() {
         presenter.startPresenting(data)
     }
 
+    override fun showLoading() {
+        TODO("not implemented")
+    }
+
+    override fun showContent() {
+        TODO("not implemented")
+    }
+
+    override fun showError() {
+        TODO("not implemented")
+    }
+
+    override fun onStop() {
+        presenter.stopPresenting()
+        super.onStop()
+    }
 }
