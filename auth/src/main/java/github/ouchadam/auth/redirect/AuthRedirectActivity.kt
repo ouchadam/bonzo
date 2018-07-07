@@ -3,9 +3,10 @@ package github.ouchadam.auth.redirect
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Toast
-import github.ouchadam.auth.AuthModule
+import github.ouchadam.auth.ExportedAuthModule
 import github.ouchadam.auth.R
+import github.ouchadam.common.BonzoBaseApplication
+import github.ouchadam.common.SchedulerPair
 import kotlinx.android.synthetic.main.activity_redirect.*
 
 class AuthRedirectActivity : AppCompatActivity(), RedirectPresenter.View {
@@ -16,8 +17,14 @@ class AuthRedirectActivity : AppCompatActivity(), RedirectPresenter.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_redirect)
 
-        val authModule = AuthModule.create()
-        presenter = authModule.redirectPresenter(this)
+        val modules = (application as BonzoBaseApplication).modules
+        val authModule = modules.auth()
+
+        presenter = RedirectPresenter(
+                authModule.authenticatorService(),
+                this,
+                SchedulerPair()
+        )
     }
 
     override fun onStart() {

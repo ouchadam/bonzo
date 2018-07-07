@@ -1,5 +1,6 @@
 package github.ouchadam.common
 
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
@@ -17,10 +18,14 @@ fun <T> Single<T>.subscribeAsLce(onLoading: OnLoading = {}, onContent: OnContent
     return toObservable().subscribeAsLce(onLoading, onContent, onError)
 }
 
+fun Completable.subscribeAsLce(onLoading: OnLoading = {}, onContent: OnContent<Unit> = {}, onError: OnError = {}): Disposable {
+    return andThen(Observable.just(Unit)).subscribeAsLce(onLoading, onContent, onError)
+}
+
 fun <T> Observable<T>.subscribeAsLce(onLoading: OnLoading = {}, onContent: OnContent<T> = {}, onError: OnError = {}): Disposable {
-    return map { github.ouchadam.common.Lce.Content<T, Throwable>(it) as Lce<T, Throwable> }
-            .startWith(github.ouchadam.common.Lce.Loading())
-            .onErrorReturn { github.ouchadam.common.Lce.Error(it) }
+    return map { Lce.Content<T, Throwable>(it) as Lce<T, Throwable> }
+            .startWith(Lce.Loading())
+            .onErrorReturn { Lce.Error(it) }
             .subscribeBy(onNext = {
                 when (it) {
                     is Lce.Loading -> onLoading()

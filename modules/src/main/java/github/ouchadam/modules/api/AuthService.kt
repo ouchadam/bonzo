@@ -1,11 +1,11 @@
-package github.ouchadam.api
+package github.ouchadam.modules.api
 
 import github.ouchadam.api.models.api.ApiAuthorizationResponse
 import github.ouchadam.api.models.api.ApiRedirectResponse
 import io.reactivex.Single
 import java.net.URL
 
-interface Auth {
+interface AuthService {
 
     fun acquireAccessTokenUrl(redirectUri: String, uniqueRequestToken: String): URL
 

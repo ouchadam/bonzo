@@ -4,6 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import github.ouchadam.common.BonzoBaseApplication
+import github.ouchadam.common.SchedulerPair
+import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
 
 class AuthActivity : AppCompatActivity(), Presenter.View {
@@ -14,8 +17,14 @@ class AuthActivity : AppCompatActivity(), Presenter.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val authModule = AuthModule.create()
-        presenter = authModule.authPresenter(this)
+        val modules = (application as BonzoBaseApplication).modules
+        val authModule = modules.auth()
+
+        presenter = Presenter(
+                authModule.authenticatorService(),
+                this,
+                SchedulerPair()
+        )
 
         authentication_error_button.setOnClickListener {
             presenter.startSignIn()

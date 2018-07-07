@@ -32,6 +32,14 @@ ext.applyCommonDependencies = { dependencies ->
     dependencies.implementation project(':common')
 }
 
+ext.applyModules = { dependencies ->
+    dependencies.implementation project(':modules')
+}
+
+ext.applyCommonAndroidDependencies = { dependencies ->
+    dependencies.implementation project(':common-android')
+}
+
 ext.applyTestDependencies = { dependencies ->
     dependencies.testImplementation 'junit:junit:4.12'
 }

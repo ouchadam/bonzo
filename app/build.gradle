@@ -29,11 +29,13 @@ android {
 
 dependencies {
     applyKotlinDependencies(it)
+    applyModules(it)
     applyCommonDependencies(it)
     applyTestDependencies(it)
     applyAndroidTestDependencies(it)
 
     implementation project(':auth')
+    implementation project(':api')
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'

@@ -8,6 +8,8 @@ def retrofit = "2.4.0"
 dependencies {
     applyKotlinDependencies(it)
     applyTestDependencies(it)
+    applyModules(it)
+
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"

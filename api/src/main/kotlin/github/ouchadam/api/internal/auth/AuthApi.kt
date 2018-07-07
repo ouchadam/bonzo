@@ -1,15 +1,15 @@
 package github.ouchadam.api.internal.auth
 
-import github.ouchadam.api.Auth
 import github.ouchadam.api.models.ClientCredentials
 import github.ouchadam.api.models.api.ApiRedirectResponse
+import github.ouchadam.modules.api.AuthService
 import retrofit2.Retrofit
 import java.net.URL
 
 private const val BASE_AUTH_URL = "https://auth.monzo.com"
 
 class AuthApi(private val endpoint: AuthEndpoint,
-              private val clientCredentials: ClientCredentials) : Auth {
+              private val clientCredentials: ClientCredentials) : AuthService {
 
     companion object {
 

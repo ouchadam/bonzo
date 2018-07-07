@@ -1,9 +1,9 @@
 package github.ouchadam.auth.redirect
 
-import github.ouchadam.auth.AuthenticatorService
 import github.ouchadam.common.SchedulerPair
 import github.ouchadam.common.schedulers
 import github.ouchadam.common.subscribeAsLce
+import github.ouchadam.modules.auth.AuthenticatorService
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 
