@@ -7,10 +7,11 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/sign_in_button"
+        android:id="@+id/authentication_error_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:text="Looks like you're signed out"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

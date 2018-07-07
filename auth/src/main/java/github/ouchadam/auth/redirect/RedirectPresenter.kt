@@ -23,7 +23,7 @@ class RedirectPresenter(
                             view.showLoading()
                         },
                         onContent = {
-                            view.showContent()
+                            view.showSignInSuccess()
                         },
                         onError = {
                             view.showError()
@@ -36,7 +36,7 @@ class RedirectPresenter(
 
         fun showLoading()
 
-        fun showContent()
+        fun showSignInSuccess()
 
         fun showError()
 

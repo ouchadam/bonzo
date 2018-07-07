@@ -30,7 +30,7 @@ class AuthRedirectActivity : AppCompatActivity(), RedirectPresenter.View {
         loading.visibility = View.VISIBLE
     }
 
-    override fun showContent() {
+    override fun showSignInSuccess() {
         loading.visibility = View.GONE
     }
 

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
 
 class AuthActivity : AppCompatActivity(), Presenter.View {
@@ -18,7 +17,7 @@ class AuthActivity : AppCompatActivity(), Presenter.View {
         val authModule = AuthModule.create()
         presenter = authModule.authPresenter(this)
 
-        sign_in_button.setOnClickListener {
+        authentication_error_button.setOnClickListener {
             presenter.startSignIn()
         }
     }
@@ -35,6 +34,7 @@ class AuthActivity : AppCompatActivity(), Presenter.View {
         Intent(Intent.ACTION_VIEW).run {
             data = Uri.parse(url.toString())
             startActivity(this)
+            finish()
         }
     }
 
