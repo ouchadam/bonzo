@@ -1,6 +1,6 @@
 package github.ouchadam.modules.api
 
-import github.ouchadam.api.models.api.ApiAuthorizationResponse
+import github.ouchadam.modules.api.models.api.ApiAuthorizationResponse
 import github.ouchadam.api.models.api.ApiRedirectResponse
 import io.reactivex.Single
 import java.net.URL

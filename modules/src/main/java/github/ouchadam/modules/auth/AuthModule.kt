@@ -4,4 +4,6 @@ interface AuthModule {
 
     fun authenticatorService(): AuthenticatorService
 
+    fun authStatusService(): AuthStatusService
+
 }

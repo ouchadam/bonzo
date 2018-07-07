@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.common.SchedulerPair
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.net.URL
 
 class SignInActivity : AppCompatActivity(), SignInPresenter.View {
@@ -16,7 +16,7 @@ class SignInActivity : AppCompatActivity(), SignInPresenter.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_sign_in)
 
         val modules = (application as BonzoBaseApplication).modules
         val authModule = modules.auth()

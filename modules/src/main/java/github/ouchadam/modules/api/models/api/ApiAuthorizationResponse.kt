@@ -1,4 +1,4 @@
-package github.ouchadam.api.models.api
+package github.ouchadam.modules.api.models.api
 
 import com.squareup.moshi.Json
 

@@ -5,6 +5,7 @@ import android.content.Context
 import github.ouchadam.api.models.ClientCredentials
 import github.ouchadam.modules.api.ApiModule
 import github.ouchadam.modules.auth.AuthModule
+import github.ouchadam.modules.auth.AuthStatusService
 
 class ExportedAuthModule(
         private val apiModule: ApiModule,
@@ -24,6 +25,10 @@ class ExportedAuthModule(
     override fun authenticatorService(): AuthenticatorService {
         val auth = apiModule.auth(clientCredentials)
         return AuthenticatorService(auth, tokenPersistence)
+    }
+
+    override fun authStatusService(): AuthStatusService {
+        return AuthStatusService(tokenPersistence)
     }
 
 }
