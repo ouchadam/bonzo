@@ -1,13 +1,16 @@
 package github.ouchadam.bonzo
 
+import android.content.Context
 import github.ouchadam.api.ExportedApiModule
-import github.ouchadam.modules.api.models.ClientCredentials
+import github.ouchadam.api.TokenProvider
+import github.ouchadam.auth.AccessTokenPersistence
 import github.ouchadam.auth.ExportedAuthModule
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.common.SchedulerPair
 import github.ouchadam.common.schedulers
 import github.ouchadam.modules.Modules
 import github.ouchadam.modules.api.ApiModule
+import github.ouchadam.modules.api.models.ClientCredentials
 import github.ouchadam.modules.auth.AuthModule
 import github.ouchadam.modules.auth.models.AuthStatus
 
@@ -24,8 +27,16 @@ class BonzoApplication : BonzoBaseApplication() {
                 secret = "mnzpub.n+m4dfG13eBk6K0MBH0T5/TKar16eutCTrKf+nljx9EK3EK87F0elRU/MbwCaLOk+gahjBxcEpq1JxU0xH/S"
         )
 
-        val apiModule = ExportedApiModule.create()
-        val authModule = ExportedAuthModule.create(apiModule, clientCredentials, this)
+        val tokenPersistence = AccessTokenPersistence(getSharedPreferences("token", Context.MODE_PRIVATE))
+
+        val apiModule = ExportedApiModule.create(object : TokenProvider {
+
+            override fun readToken() = tokenPersistence.read()?.value
+
+            override fun invalidateToken() = tokenPersistence.invalidate()
+
+        })
+        val authModule = ExportedAuthModule.create(apiModule, clientCredentials, tokenPersistence)
 
         this.modules = object : Modules {
 

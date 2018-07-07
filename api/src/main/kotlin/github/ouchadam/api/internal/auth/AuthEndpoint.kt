@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface AuthEndpoint {
 
-    @POST("https://api.monzo.com/oauth2/token")
+    @POST("/oauth2/token")
     fun submitAuthorizationCode(@Body request: ApiSubmitAuthorizationCodeRequest): Single<ApiAuthorizationResponse>
 
 }

@@ -6,7 +6,7 @@ import github.ouchadam.modules.api.AuthService
 import retrofit2.Retrofit
 import java.net.URL
 
-private const val BASE_AUTH_URL = "https://auth.monzo.com"
+private const val OAUTH_BASE_AUTH_URL = "https://auth.monzo.com"
 
 class AuthApi(private val endpoint: AuthEndpoint,
               private val clientCredentials: ClientCredentials) : AuthService {
@@ -15,7 +15,6 @@ class AuthApi(private val endpoint: AuthEndpoint,
 
         fun from(retrofit: Retrofit, clientCredentials: ClientCredentials): AuthApi {
             val endpoint = retrofit.newBuilder()
-                    .baseUrl(BASE_AUTH_URL)
                     .build()
                     .create(AuthEndpoint::class.java)
             return AuthApi(endpoint, clientCredentials)
@@ -25,7 +24,7 @@ class AuthApi(private val endpoint: AuthEndpoint,
 
     override fun acquireAccessTokenUrl(redirectUri: String, uniqueRequestToken: String) =
             URL(
-                    "$BASE_AUTH_URL?" +
+                    "$OAUTH_BASE_AUTH_URL?" +
                             "client_id=${clientCredentials.id}" +
                             "&" +
                             "redirect_uri=$redirectUri" +

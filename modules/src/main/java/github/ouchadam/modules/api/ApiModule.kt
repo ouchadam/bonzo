@@ -6,4 +6,6 @@ interface ApiModule {
 
     fun auth(credentials: ClientCredentials): AuthService
 
+    fun balance(): BalanceService
+
 }

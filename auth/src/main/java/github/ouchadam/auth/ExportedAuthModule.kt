@@ -15,8 +15,7 @@ class ExportedAuthModule(
 
     companion object {
 
-        fun create(apiModule: ApiModule, clientCredentials: ClientCredentials, context: Application): ExportedAuthModule {
-            val tokenPersistence = AccessTokenPersistence(context.getSharedPreferences("token", Context.MODE_PRIVATE))
+        fun create(apiModule: ApiModule, clientCredentials: ClientCredentials, tokenPersistence: AccessTokenPersistence): ExportedAuthModule {
             return ExportedAuthModule(apiModule, clientCredentials, tokenPersistence)
         }
 
