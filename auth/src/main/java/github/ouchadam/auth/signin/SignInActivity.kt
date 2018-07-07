@@ -1,17 +1,18 @@
-package github.ouchadam.auth
+package github.ouchadam.auth.signin
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.common.SchedulerPair
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
 
-class AuthActivity : AppCompatActivity(), Presenter.View {
+class SignInActivity : AppCompatActivity(), SignInPresenter.View {
 
-    private lateinit var presenter: Presenter
+    private lateinit var signInPresenter: SignInPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,20 +21,20 @@ class AuthActivity : AppCompatActivity(), Presenter.View {
         val modules = (application as BonzoBaseApplication).modules
         val authModule = modules.auth()
 
-        presenter = Presenter(
+        signInPresenter = SignInPresenter(
                 authModule.authenticatorService(),
                 this,
                 SchedulerPair()
         )
 
         authentication_error_button.setOnClickListener {
-            presenter.startSignIn()
+            signInPresenter.startSignIn()
         }
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.startPresenting()
+        signInPresenter.startPresenting()
     }
 
     override fun showLoading() {
@@ -51,7 +52,7 @@ class AuthActivity : AppCompatActivity(), Presenter.View {
     }
 
     override fun onStop() {
-        presenter.stopPresenting()
+        signInPresenter.stopPresenting()
         super.onStop()
     }
 

@@ -1,4 +1,4 @@
-package github.ouchadam.auth
+package github.ouchadam.auth.signin
 
 import github.ouchadam.common.SchedulerPair
 import github.ouchadam.common.schedulers
@@ -9,9 +9,9 @@ import io.reactivex.rxkotlin.plusAssign
 import java.net.URL
 import java.util.*
 
-class Presenter(private val service: AuthenticatorService,
-                private val view: View,
-                private val schedulerPair: SchedulerPair
+class SignInPresenter(private val service: AuthenticatorService,
+                      private val view: View,
+                      private val schedulerPair: SchedulerPair
 ) {
 
     private val disposables = CompositeDisposable()
