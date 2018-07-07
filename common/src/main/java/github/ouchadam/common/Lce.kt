@@ -1,4 +1,4 @@
-package github.ouchadam.auth
+package github.ouchadam.common
 
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -18,9 +18,9 @@ fun <T> Single<T>.subscribeAsLce(onLoading: OnLoading = {}, onContent: OnContent
 }
 
 fun <T> Observable<T>.subscribeAsLce(onLoading: OnLoading = {}, onContent: OnContent<T> = {}, onError: OnError = {}): Disposable {
-    return map { Lce.Content<T, Throwable>(it) as Lce<T, Throwable> }
-            .startWith(Lce.Loading())
-            .onErrorReturn { Lce.Error(it) }
+    return map { github.ouchadam.common.Lce.Content<T, Throwable>(it) as Lce<T, Throwable> }
+            .startWith(github.ouchadam.common.Lce.Loading())
+            .onErrorReturn { github.ouchadam.common.Lce.Error(it) }
             .subscribeBy(onNext = {
                 when (it) {
                     is Lce.Loading -> onLoading()

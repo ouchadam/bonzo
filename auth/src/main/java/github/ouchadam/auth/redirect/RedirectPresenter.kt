@@ -1,40 +1,34 @@
-package github.ouchadam.auth
+package github.ouchadam.auth.redirect
 
+import github.ouchadam.auth.AuthenticatorService
 import github.ouchadam.common.SchedulerPair
 import github.ouchadam.common.schedulers
 import github.ouchadam.common.subscribeAsLce
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
-import java.net.URL
-import java.util.*
 
-class Presenter(private val service: AuthenticatorService,
-                private val view: View,
-                private val schedulerPair: SchedulerPair
+class RedirectPresenter(
+        private val service: AuthenticatorService,
+        private val view: View,
+        private val schedulerPair: SchedulerPair
 ) {
 
     private val disposables = CompositeDisposable()
 
-    fun startPresenting() {
-        // do nothing
-    }
-
-    fun startSignIn() {
-        val uniqueToken = UUID.randomUUID().toString()
-        disposables += service.createUrl(uniqueToken)
+    fun startPresenting(redirectUrlResponse: String) {
+        disposables += service.submitResponse(redirectUrlResponse)
                 .schedulers(schedulerPair)
                 .subscribeAsLce(
                         onLoading = {
                             view.showLoading()
                         },
                         onContent = {
-                            view.showContent(it)
+                            view.showContent()
                         },
                         onError = {
                             view.showError()
                         })
     }
-
 
     fun stopPresenting() = disposables.clear()
 
@@ -42,7 +36,7 @@ class Presenter(private val service: AuthenticatorService,
 
         fun showLoading()
 
-        fun showContent(url: URL)
+        fun showContent()
 
         fun showError()
 
