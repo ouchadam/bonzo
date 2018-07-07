@@ -1,0 +1,36 @@
+buildscript {
+    ext.kotlin_version = '1.2.41'
+    ext.jdk_kotlin_version = '1.2.41'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext.applyKotlinDependencies = { dependencies ->
+    dependencies.implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+ext.applyTestDependencies = { dependencies ->
+    dependencies.testImplementation 'junit:junit:4.12'
+}
+
+ext.applyAndroidTestDependencies = { dependencies ->
+    dependencies.androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    dependencies.androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

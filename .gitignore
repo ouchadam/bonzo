@@ -1,0 +1,37 @@
+# Built application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+doc
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IDEA/Android Studio ignores
+*.iml
+*.ipr
+*.iws
+**/.idea/
+
+# OSX
+*.DS_Store
+
+# Ignore markdown library files
+lib-projects/bypass/dep/libsoldout
+lib-projects/bypass/platform/android/library/proguard-project.txt
+
+spoon-output
+monkey_events.log
