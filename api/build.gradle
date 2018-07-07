@@ -3,10 +3,15 @@ apply plugin: 'kotlin'
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
+def retrofit = "2.4.0"
+
 dependencies {
     applyKotlinDependencies(it)
+    applyTestDependencies(it)
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"
     implementation 'com.squareup.moshi:moshi:1.6.0'
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
     implementation 'com.squareup.moshi:moshi-kotlin:1.6.0'
 }

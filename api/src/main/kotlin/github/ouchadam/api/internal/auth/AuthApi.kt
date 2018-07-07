@@ -37,7 +37,7 @@ class AuthApi(private val endpoint: AuthEndpoint,
 
     override fun convertRedirectResponse(sourceRedirectUri: String, redirectResponse: String): ApiRedirectResponse {
         // assuming all parameters exist, are clean and unique...
-        val queryValues = URL(redirectResponse).query.split("&").map {
+        val queryValues = URL(redirectResponse.replace("bonzo://", "http://")).query.split("&").map {
             val keyValue = it.split("=")
             Pair(keyValue[0], keyValue[1])
         }.fold(HashMap<String, String>(), { accumulator, (key, value) ->
@@ -46,7 +46,7 @@ class AuthApi(private val endpoint: AuthEndpoint,
         })
         return ApiRedirectResponse(
                 sourceRedirectUri,
-                queryValues["authorization_code"]!!,
+                queryValues["code"]!!,
                 queryValues["state"]!!
         )
     }
