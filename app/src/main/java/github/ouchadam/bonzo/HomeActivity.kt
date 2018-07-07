@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.common.SchedulerPair
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(), Presenter.View {
 
@@ -14,7 +14,7 @@ class HomeActivity : AppCompatActivity(), Presenter.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
         val modules = (application as BonzoBaseApplication).modules
         val authStatusService = modules.auth().authStatusService()
         val homeService = HomeService(authStatusService)

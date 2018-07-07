@@ -2,7 +2,7 @@ package github.ouchadam.auth
 
 import android.app.Application
 import android.content.Context
-import github.ouchadam.api.models.ClientCredentials
+import github.ouchadam.modules.api.models.ClientCredentials
 import github.ouchadam.modules.api.ApiModule
 import github.ouchadam.modules.auth.AuthModule
 import github.ouchadam.modules.auth.AuthStatusService

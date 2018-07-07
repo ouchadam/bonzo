@@ -1,7 +1,7 @@
 package github.ouchadam.bonzo
 
 import github.ouchadam.api.ExportedApiModule
-import github.ouchadam.api.models.ClientCredentials
+import github.ouchadam.modules.api.models.ClientCredentials
 import github.ouchadam.auth.ExportedAuthModule
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.common.SchedulerPair

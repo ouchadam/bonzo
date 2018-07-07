@@ -3,7 +3,7 @@ package github.ouchadam.api
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import github.ouchadam.api.internal.auth.AuthApi
-import github.ouchadam.api.models.ClientCredentials
+import github.ouchadam.modules.api.models.ClientCredentials
 import github.ouchadam.modules.api.ApiModule
 import github.ouchadam.modules.api.AuthService
 import okhttp3.OkHttpClient

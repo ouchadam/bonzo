@@ -1,7 +1,7 @@
 package github.ouchadam.api.internal.auth
 
-import github.ouchadam.api.models.ClientCredentials
-import github.ouchadam.api.models.api.ApiRedirectResponse
+import github.ouchadam.modules.api.models.ClientCredentials
+import github.ouchadam.modules.api.models.api.ApiRedirectResponse
 import github.ouchadam.modules.api.AuthService
 import retrofit2.Retrofit
 import java.net.URL

@@ -1,6 +1,6 @@
 package github.ouchadam.modules.api
 
-import github.ouchadam.api.models.ClientCredentials
+import github.ouchadam.modules.api.models.ClientCredentials
 
 interface ApiModule {
 
