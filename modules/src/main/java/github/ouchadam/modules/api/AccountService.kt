@@ -1,10 +1,10 @@
 package github.ouchadam.modules.api
 
-import github.ouchadam.modules.api.models.api.ApiAccountResponse
+import github.ouchadam.modules.api.models.api.ApiAccountsResponse
 import io.reactivex.Single
 
 interface AccountService {
 
-    fun readAccounts(): Single<List<ApiAccountResponse>>
+    fun readAccounts(): Single<ApiAccountsResponse>
 
 }

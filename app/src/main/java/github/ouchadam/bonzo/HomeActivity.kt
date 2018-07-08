@@ -3,6 +3,7 @@ package github.ouchadam.bonzo
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.lce.LceStatus
@@ -60,7 +61,8 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
             }
             LceStatus.ERROR_ON_CONTENT -> TODO()
             LceStatus.IDLE_EMPTY -> {
-                // do nothing
+                Log.e("!!!", "idle empty")
+//                loading.visibility = View.VISIBLE
             }
 
             LceStatus.IDLE_WITH_CONTENT -> {

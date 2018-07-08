@@ -20,7 +20,7 @@ class ExportedAccountService(
 
     }
 
-    override fun readAccounts() = accountEndpoint.getBalance(
+    override fun readAccounts() = accountEndpoint.getAccounts(
             headersProvider.authenticatedHeaders())
 
 }

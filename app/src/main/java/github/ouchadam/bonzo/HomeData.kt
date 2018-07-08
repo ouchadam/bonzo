@@ -28,9 +28,17 @@ class HomeData(
                 .readStatus()
                 .map { toErrorIfSignedOut(it) }
                 .flatMap { accountService.readAccounts() }
-                .flatMap { balanceService.readBalance(it.first().id) }
-                .map {
-                    Holder(it.balanceInMinor)
+                .flatMap {
+                    Observable.fromIterable(it.accounts)
+                            .flatMap { account ->
+                                balanceService.readBalance(account.id).toObservable()
+                            }.toList()
+                }
+                .map { accounts ->
+                    accounts.sortBy {
+                        it.balanceInMinor
+                    }
+                    Holder(accounts.last().balanceInMinor)
                 }
 
         return lce.execute(source, { status, upstream, current ->
@@ -66,6 +74,6 @@ class HomeData(
         }
     }
 
-    data class Holder(val balance: Long)
+    private data class Holder(val balance: Long)
 
 }

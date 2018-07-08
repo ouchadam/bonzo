@@ -1,8 +1,8 @@
 package github.ouchadam.api.internal.auth
 
+import github.ouchadam.modules.api.AuthService
 import github.ouchadam.modules.api.models.ClientCredentials
 import github.ouchadam.modules.api.models.api.ApiRedirectResponse
-import github.ouchadam.modules.api.AuthService
 import retrofit2.Retrofit
 import java.net.URL
 
@@ -52,11 +52,12 @@ class AuthApi(private val endpoint: AuthEndpoint,
 
     override fun submitAuthorizationCode(redirectResponse: ApiRedirectResponse) =
             endpoint.submitAuthorizationCode(
-                    ApiSubmitAuthorizationCodeRequest(
-                            clientId = clientCredentials.id,
-                            clientSecret = clientCredentials.secret,
-                            redirectUri = redirectResponse.sourceRedirectUri,
-                            authorizationCode = redirectResponse.authorizationCode
+                    mapOf(
+                            "grant_type" to "authorization_code",
+                            "client_id" to clientCredentials.id,
+                            "client_secret" to clientCredentials.secret,
+                            "redirect_uri" to redirectResponse.sourceRedirectUri,
+                            "code" to redirectResponse.authorizationCode
                     )
             )
 

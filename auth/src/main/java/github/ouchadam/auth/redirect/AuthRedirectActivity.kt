@@ -38,10 +38,15 @@ class AuthRedirectActivity : AppCompatActivity(), RedirectPresenter.View {
 
     override fun showSignInSuccess() {
         loading.visibility = View.GONE
+        content.visibility = View.VISIBLE
+
+        content.text = "Success"
     }
 
     override fun showError() {
         loading.visibility = View.GONE
+        content.visibility = View.GONE
+        error.visibility = View.VISIBLE
     }
 
     override fun onStop() {

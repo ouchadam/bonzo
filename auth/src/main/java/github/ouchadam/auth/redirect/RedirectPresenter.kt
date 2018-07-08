@@ -1,5 +1,6 @@
 package github.ouchadam.auth.redirect
 
+import android.util.Log
 import github.ouchadam.lce.SchedulerPair
 import github.ouchadam.lce.schedulers
 import github.ouchadam.lce.subscribeAsLce
@@ -26,6 +27,7 @@ class RedirectPresenter(
                             view.showSignInSuccess()
                         },
                         onError = {
+                            Log.e("!!!", it.message, it)
                             view.showError()
                         })
     }
