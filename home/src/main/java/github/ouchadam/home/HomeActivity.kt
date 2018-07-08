@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.lce.LceStatus
 import github.ouchadam.lce.SchedulerPair
@@ -13,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 class HomeActivity : AppCompatActivity(), HomePresenter.View {
 
     private lateinit var presenter: HomePresenter
+    private lateinit var cache: ViewModelCache
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +23,16 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
         val modules = (application as BonzoBaseApplication).modules
         val authStatusService = modules.auth().authStatusService()
         val apiModule = modules.api()
+
+        cache = ViewModelProviders.of(this).get(ViewModelCache::class.java)
+        val initialModel = cache.value ?: HomeViewModel()
+
         val homeService = HomeData(
                 authStatusService,
                 apiModule.account(),
                 apiModule.balance(),
                 SchedulerPair(),
-                HomeViewModel()
+                initialModel
         )
 
         presenter = HomePresenter(
@@ -41,17 +48,25 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
 
     override fun onStart() {
         super.onStart()
+        val cacheIsEmpty = cache.value == null
+
         presenter.startPresenting()
+
+        if (cacheIsEmpty) {
+            presenter.fetch()
+        }
     }
 
     override fun show(model: HomeViewModel) {
+        cache.value = model
+
         when (model.status) {
             LceStatus.LOADING_EMPTY -> {
                 loading.visibility = View.VISIBLE
                 content.visibility = View.GONE
                 error.visibility = View.GONE
-
             }
+
             LceStatus.LOADING_ON_CONTENT -> TODO()
 
             LceStatus.ERROR_EMPTY -> {
@@ -61,8 +76,7 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
             }
             LceStatus.ERROR_ON_CONTENT -> TODO()
             LceStatus.IDLE_EMPTY -> {
-                Log.e("!!!", "idle empty")
-//                loading.visibility = View.VISIBLE
+                // do nothing
             }
 
             LceStatus.IDLE_WITH_CONTENT -> {
@@ -79,4 +93,6 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
         presenter.stopPresenting()
         super.onStop()
     }
+
+    class ViewModelCache(var value: HomeViewModel? = null) : ViewModel()
 }

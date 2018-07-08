@@ -14,7 +14,9 @@ class HomePresenter(
         disposables += homeData.observe().subscribe {
             view.show(it)
         }
+    }
 
+    fun fetch() {
         disposables += homeData.fetch()
     }
 
