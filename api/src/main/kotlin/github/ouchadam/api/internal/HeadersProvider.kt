@@ -1,4 +1,6 @@
-package github.ouchadam.api
+package github.ouchadam.api.internal
+
+import github.ouchadam.api.TokenProvider
 
 class HeadersProvider(private val tokenProvider: TokenProvider) {
 

@@ -1,6 +1,6 @@
 package github.ouchadam.api.internal.balance
 
-import github.ouchadam.api.HeadersProvider
+import github.ouchadam.api.internal.HeadersProvider
 import github.ouchadam.modules.api.BalanceService
 import retrofit2.Retrofit
 

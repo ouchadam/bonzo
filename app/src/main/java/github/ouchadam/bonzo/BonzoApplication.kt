@@ -6,8 +6,8 @@ import github.ouchadam.api.TokenProvider
 import github.ouchadam.auth.AccessTokenPersistence
 import github.ouchadam.auth.ExportedAuthModule
 import github.ouchadam.common.BonzoBaseApplication
-import github.ouchadam.common.SchedulerPair
-import github.ouchadam.common.schedulers
+import github.ouchadam.lce.SchedulerPair
+import github.ouchadam.lce.schedulers
 import github.ouchadam.modules.Modules
 import github.ouchadam.modules.api.ApiModule
 import github.ouchadam.modules.api.models.ClientCredentials

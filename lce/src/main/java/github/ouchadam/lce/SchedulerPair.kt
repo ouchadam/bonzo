@@ -1,4 +1,4 @@
-package github.ouchadam.common
+package github.ouchadam.lce
 
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -8,8 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class SchedulerPair(
-        val subscribeOn: Scheduler = AndroidSchedulers.mainThread(),
-        val observeOn: Scheduler = Schedulers.io()
+        val subscribeOn: Scheduler = Schedulers.io(),
+        val observeOn: Scheduler = AndroidSchedulers.mainThread()
 )
 
 fun <T> Observable<T>.schedulers(schedulers: SchedulerPair): Observable<T> =

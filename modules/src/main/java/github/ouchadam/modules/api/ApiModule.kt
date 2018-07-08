@@ -8,4 +8,6 @@ interface ApiModule {
 
     fun balance(): BalanceService
 
+    fun account(): AccountService
+
 }

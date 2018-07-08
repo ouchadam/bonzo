@@ -3,10 +3,9 @@ package github.ouchadam.auth.redirect
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import github.ouchadam.auth.ExportedAuthModule
 import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
-import github.ouchadam.common.SchedulerPair
+import github.ouchadam.lce.SchedulerPair
 import kotlinx.android.synthetic.main.activity_redirect.*
 
 class AuthRedirectActivity : AppCompatActivity(), RedirectPresenter.View {

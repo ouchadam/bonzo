@@ -1,4 +1,4 @@
-package github.ouchadam.common
+package github.ouchadam.lce
 
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -33,6 +33,16 @@ fun <T> Observable<T>.subscribeAsLce(onLoading: OnLoading = {}, onContent: OnCon
                     is Lce.Error -> onError(it.error)
                 }
             })
+}
+
+fun <T> Single<T>.mapToLce(): Observable<Lce<T, Throwable>> {
+    return toObservable().mapToLce()
+}
+
+fun <T> Observable<T>.mapToLce(): Observable<Lce<T, Throwable>> {
+    return map { Lce.Content<T, Throwable>(it) as Lce<T, Throwable> }
+            .startWith(Lce.Loading())
+            .onErrorReturn { Lce.Error(it) }
 }
 
 typealias OnContent<T> = (T) -> Unit

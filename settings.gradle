@@ -1,1 +1,1 @@
-include ':app', ':api', ':auth', ':common', ':modules'
+include ':app', ':api', ':auth', ':common', ':modules', ':lce'

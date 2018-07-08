@@ -5,27 +5,34 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import github.ouchadam.common.BonzoBaseApplication
-import github.ouchadam.common.SchedulerPair
+import github.ouchadam.lce.LceStatus
+import github.ouchadam.lce.SchedulerPair
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity(), Presenter.View {
+class HomeActivity : AppCompatActivity(), HomePresenter.View {
 
-    private lateinit var presenter: Presenter
+    private lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val modules = (application as BonzoBaseApplication).modules
         val authStatusService = modules.auth().authStatusService()
-        val homeService = HomeService(authStatusService)
-
-        presenter = Presenter(
-                homeService,
-                this,
-                SchedulerPair()
+        val apiModule = modules.api()
+        val homeService = HomeData(
+                authStatusService,
+                apiModule.account(),
+                apiModule.balance(),
+                SchedulerPair(),
+                HomeViewModel()
         )
 
-        authentication_error_button.setOnClickListener {
+        presenter = HomePresenter(
+                homeService,
+                this
+        )
+
+        error.setOnClickListener {
             val authActivity = Intent("${BuildConfig.APPLICATION_ID}.auth")
             startActivity(authActivity)
         }
@@ -36,16 +43,34 @@ class HomeActivity : AppCompatActivity(), Presenter.View {
         presenter.startPresenting()
     }
 
-    override fun showLoading() {
-        authentication_error_button.visibility = View.GONE
-    }
+    override fun show(model: HomeViewModel) {
+        when (model.status) {
+            LceStatus.LOADING_EMPTY -> {
+                loading.visibility = View.VISIBLE
+                content.visibility = View.GONE
+                error.visibility = View.GONE
 
-    override fun showContent(model: ViewModel) {
-        authentication_error_button.visibility = View.GONE
-    }
+            }
+            LceStatus.LOADING_ON_CONTENT -> TODO()
 
-    override fun showError() {
-        authentication_error_button.visibility = View.VISIBLE
+            LceStatus.ERROR_EMPTY -> {
+                loading.visibility = View.GONE
+                content.visibility = View.GONE
+                error.visibility = View.VISIBLE
+            }
+            LceStatus.ERROR_ON_CONTENT -> TODO()
+            LceStatus.IDLE_EMPTY -> {
+                // do nothing
+            }
+
+            LceStatus.IDLE_WITH_CONTENT -> {
+                loading.visibility = View.GONE
+                content.visibility = View.VISIBLE
+                error.visibility = View.GONE
+
+                content.text = model.balanceLabel
+            }
+        }
     }
 
     override fun onStop() {

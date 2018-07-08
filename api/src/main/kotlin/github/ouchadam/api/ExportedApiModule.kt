@@ -2,8 +2,11 @@ package github.ouchadam.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import github.ouchadam.api.internal.HeadersProvider
+import github.ouchadam.api.internal.account.ExportedAccountService
 import github.ouchadam.api.internal.auth.AuthApi
 import github.ouchadam.api.internal.balance.ExportedBalanceService
+import github.ouchadam.modules.api.AccountService
 import github.ouchadam.modules.api.ApiModule
 import github.ouchadam.modules.api.AuthService
 import github.ouchadam.modules.api.BalanceService
@@ -17,7 +20,6 @@ private const val BASE_URL = "https://api.monzo.com"
 
 class ExportedApiModule(
         private val retrofit: Retrofit,
-        private val moshi: Moshi,
         private val headersProvider: HeadersProvider
 ) : ApiModule {
 
@@ -35,7 +37,7 @@ class ExportedApiModule(
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .baseUrl(BASE_URL)
                     .build()
-            return ExportedApiModule(retrofit, moshi, HeadersProvider(tokenProvider))
+            return ExportedApiModule(retrofit, HeadersProvider(tokenProvider))
         }
     }
 
@@ -43,5 +45,6 @@ class ExportedApiModule(
 
     override fun balance(): BalanceService = ExportedBalanceService.from(retrofit, headersProvider)
 
+    override fun account(): AccountService = ExportedAccountService.from(retrofit, headersProvider)
 
 }

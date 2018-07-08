@@ -3,6 +3,7 @@ package github.ouchadam.auth
 import github.ouchadam.modules.auth.AuthStatusService
 import github.ouchadam.modules.auth.models.AuthStatus
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
 class AuthStatusService(private val tokenPersistence: AccessTokenPersistence) : AuthStatusService {
@@ -27,8 +28,8 @@ class AuthStatusService(private val tokenPersistence: AccessTokenPersistence) : 
         subject.onNext(toStatus(hasAccount))
     }
 
-    override fun readStatus(): Observable<AuthStatus> {
-        return Observable.just(toStatus(tokenPersistence.read() != null))
+    override fun readStatus(): Single<AuthStatus> {
+        return Single.just(toStatus(tokenPersistence.read() != null))
     }
 
     private fun toStatus(hasAccount: Boolean): AuthStatus {

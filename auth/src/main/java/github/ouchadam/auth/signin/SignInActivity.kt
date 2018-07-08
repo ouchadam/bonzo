@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
-import github.ouchadam.common.SchedulerPair
+import github.ouchadam.lce.SchedulerPair
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.net.URL
 
@@ -27,7 +27,7 @@ class SignInActivity : AppCompatActivity(), SignInPresenter.View {
                 SchedulerPair()
         )
 
-        authentication_error_button.setOnClickListener {
+        authentication_error.setOnClickListener {
             signInPresenter.startSignIn()
         }
     }
