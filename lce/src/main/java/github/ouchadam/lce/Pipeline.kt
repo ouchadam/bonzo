@@ -38,7 +38,6 @@ class Pipeline<I, VM : ViewModel>(private val schedulerPair: SchedulerPair, priv
 
 }
 
-
 sealed class Lce<T, U> {
 
     data class Loading<T, U>(val content: T? = null) : Lce<T, U>()

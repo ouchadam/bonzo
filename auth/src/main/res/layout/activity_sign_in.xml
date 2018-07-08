@@ -6,7 +6,7 @@
     android:background="@android:color/holo_blue_dark">
 
     <Button
-        android:id="@+id/authentication_error"
+        android:id="@+id/start_sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click to start sign in!"

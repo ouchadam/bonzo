@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
+import github.ouchadam.lce.LceStatus
 import github.ouchadam.lce.SchedulerPair
 import kotlinx.android.synthetic.main.activity_sign_in.*
-import java.net.URL
 
 class SignInActivity : AppCompatActivity(), SignInPresenter.View {
 
@@ -21,13 +21,18 @@ class SignInActivity : AppCompatActivity(), SignInPresenter.View {
         val modules = (application as BonzoBaseApplication).modules
         val authModule = modules.auth()
 
-        signInPresenter = SignInPresenter(
+        val signInData = SignInData(
                 authModule.authenticatorService(),
-                this,
+                SignInViewModel(),
                 SchedulerPair()
         )
 
-        authentication_error.setOnClickListener {
+        signInPresenter = SignInPresenter(
+                signInData,
+                this
+        )
+
+        start_sign_in_button.setOnClickListener {
             signInPresenter.startSignIn()
         }
     }
@@ -37,18 +42,21 @@ class SignInActivity : AppCompatActivity(), SignInPresenter.View {
         signInPresenter.startPresenting()
     }
 
-    override fun showLoading() {
-    }
-
-    override fun showContent(url: URL) {
-        Intent(Intent.ACTION_VIEW).run {
-            data = Uri.parse(url.toString())
-            startActivity(this)
-            finish()
+    override fun show(model: SignInViewModel) {
+        when (model.status) {
+            LceStatus.IDLE_WITH_CONTENT -> {
+                model.signInPayload?.let {
+                    Intent(Intent.ACTION_VIEW).run {
+                        data = Uri.parse(it.toString())
+                        startActivity(this)
+                        finish()
+                    }
+                }
+            }
+            else -> {
+                // do nothing
+            }
         }
-    }
-
-    override fun showError() {
     }
 
     override fun onStop() {

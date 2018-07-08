@@ -1,46 +1,28 @@
 package github.ouchadam.auth.redirect
 
-import android.util.Log
-import github.ouchadam.lce.SchedulerPair
-import github.ouchadam.lce.schedulers
-import github.ouchadam.lce.subscribeAsLce
-import github.ouchadam.modules.auth.AuthenticatorService
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 
 class RedirectPresenter(
-        private val service: AuthenticatorService,
-        private val view: View,
-        private val schedulerPair: SchedulerPair
+        private val redirectData: RedirectData,
+        private val view: View
 ) {
 
     private val disposables = CompositeDisposable()
 
     fun startPresenting(redirectUrlResponse: String) {
-        disposables += service.submitResponse(redirectUrlResponse)
-                .schedulers(schedulerPair)
-                .subscribeAsLce(
-                        onLoading = {
-                            view.showLoading()
-                        },
-                        onContent = {
-                            view.showSignInSuccess()
-                        },
-                        onError = {
-                            Log.e("!!!", it.message, it)
-                            view.showError()
-                        })
+        disposables += redirectData.observe().subscribe {
+            view.show(it)
+        }
+
+        disposables += redirectData.submitResponse(redirectUrlResponse)
     }
 
     fun stopPresenting() = disposables.clear()
 
     interface View {
 
-        fun showLoading()
-
-        fun showSignInSuccess()
-
-        fun showError()
+        fun show(model: RedirectViewModel)
 
     }
 
