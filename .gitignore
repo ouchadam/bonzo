@@ -35,3 +35,7 @@ lib-projects/bypass/platform/android/library/proguard-project.txt
 
 spoon-output
 monkey_events.log
+
+# secrets
+
+meta/secrets.properties

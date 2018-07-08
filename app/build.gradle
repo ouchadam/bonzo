@@ -1,14 +1,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.novoda.build-properties'
 
 applyAndroid(project)
+
+buildProperties {
+    secrets {
+        using new File(metaDirectory, "secrets.properties")
+    }
+}
 
 android {
     defaultConfig {
         applicationId "github.ouchadam.bonzo"
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "CLIENT_ID", "\"${buildProperties.secrets['client_id'].string}\""
+        buildConfigField "String", "CLIENT_SECRET", "\"${buildProperties.secrets['client_secret'].string}\""
     }
 
     signingConfigs {

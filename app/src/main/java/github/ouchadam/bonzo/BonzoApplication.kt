@@ -23,8 +23,8 @@ class BonzoApplication : BonzoBaseApplication() {
         super.onCreate()
 
         val clientCredentials = ClientCredentials(
-                id = "oauth2client_00009YP4w3uEHpEjk1eyqf",
-                secret = "mnzpub.n+m4dfG13eBk6K0MBH0T5/TKar16eutCTrKf+nljx9EK3EK87F0elRU/MbwCaLOk+gahjBxcEpq1JxU0xH/S"
+                id = BuildConfig.CLIENT_ID,
+                secret = BuildConfig.CLIENT_SECRET
         )
 
         val tokenPersistence = AccessTokenPersistence(getSharedPreferences("token", Context.MODE_PRIVATE))
