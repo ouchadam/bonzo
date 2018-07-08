@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+applyAndroid(project)
+
+dependencies {
+    applyKotlinDependencies(it)
+    applyCommonDependencies(it)
+    applyTestDependencies(it)
+    applyAndroidTestDependencies(it)
+    applyModules(it)
+
+    implementation project(':lce')
+
+    api 'com.android.support:appcompat-v7:27.1.1'
+    api 'com.android.support.constraint:constraint-layout:1.1.2'
+}

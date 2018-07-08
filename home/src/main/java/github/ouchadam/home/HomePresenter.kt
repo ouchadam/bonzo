@@ -1,4 +1,4 @@
-package github.ouchadam.bonzo
+package github.ouchadam.home
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign

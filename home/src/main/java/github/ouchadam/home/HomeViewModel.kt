@@ -1,4 +1,4 @@
-package github.ouchadam.bonzo
+package github.ouchadam.home
 
 import github.ouchadam.lce.LceStatus
 import github.ouchadam.lce.ViewModel

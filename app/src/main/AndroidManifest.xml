@@ -10,13 +10,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
+        <activity-alias
+            android:name=".StartActivity"
+            android:targetActivity="github.ouchadam.home.HomeActivity">
+            <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
-        </activity>
+
+            <meta-data
+                android:name="startActivity"
+                android:value="true" />
+
+        </activity-alias>
+
     </application>
 
 </manifest>

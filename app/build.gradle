@@ -34,7 +34,11 @@ dependencies {
     applyTestDependencies(it)
     applyAndroidTestDependencies(it)
 
+    // features
     implementation project(':auth')
+    implementation project(':home')
+
+    // libs
     implementation project(':api')
     implementation project(':lce')
 
