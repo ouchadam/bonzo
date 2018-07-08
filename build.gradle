@@ -51,11 +51,11 @@ ext.applyAndroidTestDependencies = { dependencies ->
 
 ext.applyAndroid = { project ->
     project.android {
-        compileSdkVersion 27
+        compileSdkVersion 28
 
         defaultConfig {
             minSdkVersion 21
-            targetSdkVersion 27
+            targetSdkVersion 28
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
             def navigationUri = 'github.ouchada.bonzo'

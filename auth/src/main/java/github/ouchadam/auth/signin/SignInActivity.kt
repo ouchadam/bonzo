@@ -3,7 +3,7 @@ package github.ouchadam.auth.signin
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.lce.LceStatus

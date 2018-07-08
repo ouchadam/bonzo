@@ -2,11 +2,9 @@ package github.ouchadam.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import github.ouchadam.home.BuildConfig
-import github.ouchadam.home.R
+import androidx.appcompat.app.AppCompatActivity
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.lce.LceStatus
 import github.ouchadam.lce.SchedulerPair

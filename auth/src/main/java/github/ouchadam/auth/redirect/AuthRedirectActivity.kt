@@ -1,8 +1,8 @@
 package github.ouchadam.auth.redirect
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import github.ouchadam.auth.R
 import github.ouchadam.common.BonzoBaseApplication
 import github.ouchadam.lce.LceStatus
