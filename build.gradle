@@ -64,6 +64,7 @@ ext.applyAndroid = { project ->
             manifestPlaceholders = [
                     navigation_uri: navigationUri
             ]
+            buildConfigField "String", "NAVIGATION_URI", "\"${navigationUri}\""
         }
 
         compileOptions {

@@ -40,7 +40,7 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
         )
 
         error.setOnClickListener {
-            val authActivity = Intent("${BuildConfig.APPLICATION_ID}.auth")
+            val authActivity = Intent("${BuildConfig.NAVIGATION_URI}.auth")
             startActivity(authActivity)
         }
     }
